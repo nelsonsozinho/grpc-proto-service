@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "br.com.shire42.customer";
+
+message CustomerResponse {
+  string id = 1;
+  string firstName  = 2;
+  string lastName  = 3;
+  string email  = 4;
+}
+
+message CustomerResponseList {
+  repeated CustomerResponse customers = 1;
+}
+
+message CustomerRequest {
+  string firstName  = 2;
+  string lastName  = 3;
+  string email  = 4;
+}
+
+service CustomerService {
+    rpc findCustomer(CustomerRequest) returns (CustomerResponseList);
+    rpc saveCustomer(CustomerRequest) returns (CustomerResponse);
+}
