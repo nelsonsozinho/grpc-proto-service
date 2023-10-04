@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "br.com.shire42.wallet";
+
+message ProtoCard {
+  string id = 1;
+  string holderName = 2;
+  string number = 3;
+  string expire = 4;
+  string cvs = 5;
+}
+
+message ProtoWallet {
+  string id = 1;
+  string customerId  = 2;
+  string walletName  = 3;
+  string description = 4;
+  double cash = 5;
+  ProtoCardList cards = 6;
+}
+
+message ProtoCardList {
+  repeated ProtoCard cards = 1;
+}
+
+message ProtoWalletList {
+  repeated ProtoWallet wallets = 1;
+}
+
+message WalletRequest {
+  string customerId = 1;
+}
+
+service WalletService {
+    rpc findWalletByCustomer(WalletRequest) returns (ProtoWallet);
+    rpc saveNewWallet(ProtoWallet) returns (ProtoWallet);
+}
