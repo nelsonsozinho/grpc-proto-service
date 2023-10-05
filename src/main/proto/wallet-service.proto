@@ -8,7 +8,7 @@ message ProtoCard {
   string holderName = 2;
   string number = 3;
   string expire = 4;
-  string cvs = 5;
+  string cvc = 5;
 }
 
 message ProtoWallet {
@@ -17,11 +17,7 @@ message ProtoWallet {
   string walletName  = 3;
   string description = 4;
   double cash = 5;
-  ProtoCardList cards = 6;
-}
-
-message ProtoCardList {
-  repeated ProtoCard cards = 1;
+  repeated ProtoCard cards = 6;
 }
 
 message ProtoWalletList {
@@ -33,6 +29,6 @@ message WalletRequest {
 }
 
 service WalletService {
-    rpc findWalletByCustomer(WalletRequest) returns (ProtoWallet);
+    rpc findWalletsByCustomer(WalletRequest) returns (ProtoWalletList);
     rpc saveNewWallet(ProtoWallet) returns (ProtoWallet);
 }
